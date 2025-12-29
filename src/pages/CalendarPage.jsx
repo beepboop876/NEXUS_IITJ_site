@@ -38,7 +38,7 @@ const CalendarPage = () => {
                     <Calendar />
                 </section>
 
-                {/* Hero Section with APOD */}
+                {/*Section with APOD */}
                 <section className="relative rounded-3xl overflow-hidden min-h-[400px] flex items-end border border-white/10 group">
                     <div className="absolute inset-0 z-0">
                         {loading ? (

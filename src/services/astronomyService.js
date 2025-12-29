@@ -3,9 +3,6 @@ import astronomyEvents from '../data/astronomyEvents.json';
 // Base URL for USNO API
 const BASE_URL = 'https://aa.usno.navy.mil/api';
 
-/**
- * Helper to formatting YYYY-MM-DD from numbers
- */
 const formatDate = (year, month, day) => {
     const pad = n => n < 10 ? '0' + n : n;
     return `${year}-${pad(month)}-${pad(day)}`;
@@ -67,7 +64,6 @@ const fetchSeasons = async (year) => {
             let title = item.phenom;
             let desc = `Astronomical Event: ${item.phenom}`;
 
-            // Refine Title and Description based on Month
             if (item.phenom === 'Equinox') {
                 if (item.month < 7) { // March
                     title = 'March Equinox';
@@ -120,18 +116,13 @@ const fetchSolarEclipses = async (year) => {
         // Data format: { eclipses_in_year: [ { event: "...", day: 29, month: 3, year: 2025 }, ... ] }
         if (!data.eclipses_in_year) return [];
 
-        // For each eclipse, we might want to check local visibility if coordinates are provided
-        // But for the general calendar/list, the global list is good start.
-        // The user provided coords: 26°28'00.9"N 73°06'53.0"E -> 26.4669, 73.1147
         const LAT = 26.4669;
         const LON = 73.1147;
 
         const events = await Promise.all(data.eclipses_in_year.map(async (eclipse) => {
 
-            // Construct YYYY-MM-DD from the eclipse item itself
             const dateStr = formatDate(eclipse.year, eclipse.month, eclipse.day);
 
-            // Try to fetch local circumstances
             try {
                 // api uses date=YYYY-MM-DD
                 const localResp = await fetch(`${BASE_URL}/eclipses/solar/date?date=${dateStr}&coords=${LAT},${LON}&height=0`);
@@ -174,7 +165,7 @@ const fetchSolarEclipses = async (year) => {
 };
 
 /**
- * Retrieves pre-calculated planetary events (Lunar Eclipses, Elongations, Oppositions) from local data.
+ * Retrieves pre-calculated planetary events (Lunar Eclipses, Elongations, Oppositions) from src/data/astronomyEvents.json.
  * @param {number} year 
  */
 const getPlanetaryEvents = (year) => {

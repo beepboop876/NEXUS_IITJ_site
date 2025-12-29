@@ -2,10 +2,10 @@
 import React from 'react';
 
 export const MoonIcon = ({ phase, className = "w-3 h-3" }) => {
-    // Normalize phase input to handle both numeric and string values consistently
+    
     // Phase: 0 = New, 4 = Full. 
     
-    // Check for New Moon (0 or string check)
+    // Check for New Moon
     if (phase === 0 || (typeof phase === 'string' && phase.toLowerCase().includes('new')))
         return (
             <div 
@@ -14,7 +14,7 @@ export const MoonIcon = ({ phase, className = "w-3 h-3" }) => {
             />
         );
 
-    // Check for Full Moon (4 or string check)
+    // Check for Full Moon
     if (phase === 4 || (typeof phase === 'string' && phase.toLowerCase().includes('full')))
         return (
             <div 
@@ -23,7 +23,6 @@ export const MoonIcon = ({ phase, className = "w-3 h-3" }) => {
             />
         );
 
-    // Quarter/Gibbous fallback (if we decide to show them) - Generic Icon
     return (
         <div className={`${className} rounded-full overflow-hidden border border-slate-600 bg-slate-900 relative`} title={`Phase ${phase}`}>
             <div className="absolute inset-y-0 right-0 w-1/2 bg-slate-300 opacity-50" />

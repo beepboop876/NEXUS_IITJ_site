@@ -60,7 +60,7 @@ const Calendar = () => {
 
     const getEventsForDay = (day) => {
         const checkDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        // Adjust for timezone offset
+        // Adjust for timezone
         const offset = checkDate.getTimezoneOffset();
         const localDate = new Date(checkDate.getTime() - (offset * 60 * 1000));
         const dateString = localDate.toISOString().split('T')[0];
@@ -86,7 +86,7 @@ const Calendar = () => {
         if (type.includes('solar-eclipse')) return solarEclipseImg;
         if (type.includes('lunar-eclipse')) return lunarEclipseImg;
 
-        // Sun Events (equinoxes, solstices, perhelions, aphelions)
+        // Sun Events (equinoxes,solstices, perhelions, aphelions)
         if (title.includes('equinox') || title.includes('solstice') || title.includes('perihelion') || title.includes('aphelion')) {
             return sunCalImg;
         }
@@ -222,7 +222,7 @@ const Calendar = () => {
                                     : moonPhaseEvent?.title?.toLowerCase().includes('full moon') ? 4
                                         : -1;
 
-                                // Get images for events
+                                //images for events
                                 const eventImages = dayEvents
                                     .map(evt => getEventImage(evt))
                                     .filter(img => img !== null);
@@ -239,7 +239,7 @@ const Calendar = () => {
                             ${dayEvents.length > 0 ? 'shadow-[0_0_15px_rgba(59,130,246,0.1)]' : ''}
                           `}
                                     >
-                                        {/* Background Images */}
+                                        {/* Background Images*/}
                                         {uniqueImages.length > 0 && (
                                             <div className="absolute inset-0 z-0 flex opacity-40 pointer-events-none">
                                                 {uniqueImages.slice(0, 2).map((img, i) => (
@@ -249,7 +249,7 @@ const Calendar = () => {
                                                             alt=""
                                                             className="w-full h-full object-cover"
                                                         />
-                                                        {/* Gradient overlay for better text readability */}
+                                                        
                                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b14] via-transparent to-transparent opacity-90" />
                                                     </div>
                                                 ))}
@@ -269,7 +269,7 @@ const Calendar = () => {
                                             )}
                                         </div>
 
-                                        {/* Event Descriptions */}
+                                        {/* event descriptions */}
                                         <div className="relative z-10 flex flex-col gap-1 overflow-hidden h-full justify-end">
                                             {dayEvents.slice(0, 3).map((evt, i) => (
                                                 <div key={i} className="hidden sm:block text-[9px] text-blue-300 truncate font-mono bg-black/40 px-1 rounded border border-blue-500/30 leading-tight backdrop-blur-[2px]">
@@ -282,7 +282,7 @@ const Calendar = () => {
                                                 </div>
                                             )}
 
-                                            {/* Mobile View Dots */}
+                                            {/*For mobile view, dots used to represent events. */}
                                             <div className="sm:hidden flex gap-0.5 justify-center flex-wrap">
                                                 {dayEvents.map((_, i) => (
                                                     <div key={i} className="w-1 h-1 rounded-full bg-blue-400" />
@@ -368,7 +368,7 @@ const Calendar = () => {
                             onClick={e => e.stopPropagation()}
                             className="w-full max-w-3xl bg-[#0a0a12] border border-blue-500/30 rounded-xl overflow-hidden shadow-2xl max-h-[85vh] flex flex-col"
                         >
-                            {/* Modal Header */}
+                            {/* Header */}
                             <div className="flex justify-between items-center p-4 sm:p-6 border-b border-white/10 bg-gradient-to-r from-blue-900/20 to-transparent shrink-0">
                                 <div className="font-mono text-blue-400 text-xs sm:text-sm tracking-widest flex items-center gap-2">
                                     <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
